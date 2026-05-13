@@ -3,8 +3,9 @@ import { SITE_URL } from "../../../../config/site";
 import { buildPageMetadata, fetchProjectBySlugServer } from "../../../lib/seo";
 
 export async function generateMetadata({ params }) {
-  const projectType = params?.projectType || "corporate";
-  const projectSlug = params?.projectSlug || "";
+  const routeParams = await params;
+  const projectType = routeParams?.projectType || "corporate";
+  const projectSlug = routeParams?.projectSlug || "";
   const base = await buildPageMetadata({
     path: `/projects/${projectType}/${projectSlug}`,
     titleKey: "seo.projects.title",
@@ -47,8 +48,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const projectType = params?.projectType || "corporate";
-  const projectSlug = params?.projectSlug || "";
+  const routeParams = await params;
+  const projectType = routeParams?.projectType || "corporate";
+  const projectSlug = routeParams?.projectSlug || "";
   const normalized = String(projectType).toLowerCase() === "coporate" ? "corporate" : String(projectType).toLowerCase();
   const initialProject = await fetchProjectBySlugServer(projectSlug);
   const projectSchema = initialProject

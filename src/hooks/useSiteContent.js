@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchPublicSiteSettings } from "../services/api";
 import { useSiteContentContext } from "../components/next/SiteContentProvider";
 
@@ -8,6 +8,7 @@ export function useSiteContent() {
   const context = useSiteContentContext();
   const [settings, setSettings] = useState(context?.settings || null);
   const [blocks, setBlocks] = useState(Array.isArray(context?.blocks) ? context.blocks : []);
+  const hasAttemptedClientFetchRef = useRef(false);
 
   useEffect(() => {
     let mounted = true;
@@ -25,7 +26,8 @@ export function useSiteContent() {
     };
 
     // Only fetch once on client if server-seeded data is missing.
-    if (!settings || blocks.length === 0) {
+    if ((!settings || blocks.length === 0) && !hasAttemptedClientFetchRef.current) {
+      hasAttemptedClientFetchRef.current = true;
       refresh();
     }
 

@@ -13,7 +13,7 @@ function BlogPage({ initialBlogs = [] }) {
   const hasInitial = Array.isArray(initialBlogs) && initialBlogs.length > 0;
   const [blogs, setBlogs] = useState(Array.isArray(initialBlogs) ? initialBlogs : []);
   const [loading, setLoading] = useState(!hasInitial);
-  const [error, setError] = useState("");
+  const hasBlogData = blogs.length > 0;
 
   useEffect(() => {
     if (hasInitial) return;
@@ -22,7 +22,7 @@ function BlogPage({ initialBlogs = [] }) {
         const items = await fetchPublishedBlogs();
         setBlogs(items);
       } catch (_) {
-        setError("No blogs available");
+        setBlogs([]);
       } finally {
         setLoading(false);
       }
@@ -51,12 +51,11 @@ function BlogPage({ initialBlogs = [] }) {
         </div>
       </section>
 
+      {loading ? <p className="mt-8 text-center text-white/70">Loading blogs...</p> : null}
+
+      {!loading && hasBlogData ? (
       <section className="px-6 pb-20 pt-16 md:px-12">
         <AnimateIn><h2 className="text-center text-3xl font-light sm:text-4xl md:text-5xl">{getText("blog.list.heading", "Read our latest published blogs")}</h2></AnimateIn>
-
-        {loading ? <p className="mt-8 text-center text-white/70">Loading blogs...</p> : null}
-        {!loading && error ? <p className="mt-8 text-center text-white/70">{error}</p> : null}
-        {!loading && !error && blogs.length === 0 ? <p className="mt-8 text-center text-white/70">No blogs available</p> : null}
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {blogs.map((blog, idx) => (
@@ -80,13 +79,16 @@ function BlogPage({ initialBlogs = [] }) {
           ))}
         </div>
       </section>
+      ) : null}
 
+      {!loading && hasBlogData ? (
       <section className="px-6 pb-10 text-center md:px-12">
         <p className="text-base text-white/70 sm:text-lg md:text-xl">Are you preparing for your wedding?</p>
         <Link href="/contact-us" className="mt-2 inline-block text-3xl font-light hover:text-white/85 sm:text-6xl md:text-8xl">
           GET IN TOUCH
         </Link>
       </section>
+      ) : null}
     </main>
   );
 }

@@ -34,6 +34,7 @@ function CategoryProjectsView({ activeType, initialProjects = [] }) {
   const [projects, setProjects] = useState(Array.isArray(initialProjects) ? initialProjects : []);
   const [loading, setLoading] = useState(!hasInitial);
   const [error, setError] = useState("");
+  const hasProjectData = projects.length > 0;
   const categoryConfig = categoryMap[activeType];
   const pageHeroImage = getProjectsHeroByType(getImage, activeType, categoryConfig.hero);
 
@@ -93,15 +94,7 @@ function CategoryProjectsView({ activeType, initialProjects = [] }) {
           </p>
 
           {loading ? <p className="text-white/70">Loading projects...</p> : null}
-          {error ? <p className="rounded-md border border-white/15 p-8 text-center text-white/70">{error}</p> : null}
-
-          {!loading && !error && projects.length === 0 ? (
-            <div className="rounded-md border border-white/15 p-8 text-center text-white/70">
-              No {categoryConfig.title.toLowerCase()} projects published yet.
-            </div>
-          ) : null}
-
-          {!loading && !error && projects.length > 0 ? (
+          {!loading && !error && hasProjectData ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((project) => (
                 <Link

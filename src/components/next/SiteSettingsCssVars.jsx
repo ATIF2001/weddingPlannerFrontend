@@ -23,6 +23,11 @@ export default function SiteSettingsCssVars({ settings }) {
   useEffect(() => {
     let mounted = true;
     applySettingsToCssVars(settings);
+    if (settings) {
+      return () => {
+        mounted = false;
+      };
+    }
     fetchPublicSiteSettings()
       .then(({ settings }) => {
         if (!mounted || !settings) return;

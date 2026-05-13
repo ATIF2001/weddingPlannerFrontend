@@ -3,7 +3,8 @@ import { SITE_URL } from "../../../config/site";
 import { buildPageMetadata, fetchProjectsServer } from "../../lib/seo";
 
 export async function generateMetadata({ params }) {
-  const projectType = params?.projectType || "corporate";
+  const routeParams = await params;
+  const projectType = routeParams?.projectType || "corporate";
   const normalized = String(projectType).toLowerCase() === "coporate" ? "corporate" : String(projectType).toLowerCase();
   const titleType = normalized.charAt(0).toUpperCase() + normalized.slice(1);
   const base = await buildPageMetadata({
@@ -25,7 +26,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const projectType = params?.projectType || "corporate";
+  const routeParams = await params;
+  const projectType = routeParams?.projectType || "corporate";
   const normalized = String(projectType).toLowerCase() === "coporate" ? "corporate" : String(projectType).toLowerCase();
   const initialProjects = await fetchProjectsServer(normalized);
   return <ProjectsPage forcedType={normalized} initialProjects={initialProjects} />;

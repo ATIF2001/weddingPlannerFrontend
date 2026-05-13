@@ -3,7 +3,8 @@ import { SITE_URL } from "../../../config/site";
 import { buildPageMetadata, fetchBlogBySlugServer } from "../../lib/seo";
 
 export async function generateMetadata({ params }) {
-  const slug = params?.slug || "";
+  const routeParams = await params;
+  const slug = routeParams?.slug || "";
   const base = await buildPageMetadata({
     path: `/blogs/${slug}`,
     titleKey: "seo.blog.title",
@@ -46,7 +47,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const slug = params?.slug || "";
+  const routeParams = await params;
+  const slug = routeParams?.slug || "";
   const initialBlog = await fetchBlogBySlugServer(slug);
   const blogSchema = initialBlog
     ? {
