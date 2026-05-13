@@ -18,15 +18,15 @@ export function useSiteContent() {
       setBlocks(Array.isArray(data?.blocks) ? data.blocks : []);
     };
 
-    const refresh = (force = false) => {
-      fetchPublicSiteSettings({ force })
+    const refresh = () => {
+      fetchPublicSiteSettings()
         .then(applyData)
         .catch(() => {});
     };
 
     // Only fetch once on client if server-seeded data is missing.
     if (!settings || blocks.length === 0) {
-      refresh(true);
+      refresh();
     }
 
     return () => {
