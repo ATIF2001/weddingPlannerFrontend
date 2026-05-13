@@ -74,7 +74,7 @@ function CategoryProjectsView({ activeType, initialProjects = [] }) {
         }}
       />
 
-      <section className="relative min-h-[720px] bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url(${pageHeroImage})` }}>
+      <section className="relative min-h-[720px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${pageHeroImage})` }}>
         <div className="absolute inset-0 bg-black/20" />
         <div className="relative z-10 flex min-h-[720px] flex-col px-6 pt-5 md:px-12">
           <div className="pt-20" />
@@ -105,7 +105,7 @@ function CategoryProjectsView({ activeType, initialProjects = [] }) {
                   <img
                     src={project.coverImage || pageHeroImage}
                     alt={project.title}
-                    className="h-[360px] w-full object-contain bg-zinc-950 transition duration-500 group-hover:scale-[1.01]"
+                    className="h-[360px] w-full object-cover bg-zinc-950 transition duration-500 group-hover:scale-[1.01]"
                   />
                   <div className="bg-[#d9d9d9] px-4 py-3 text-center text-2xl text-black">{project.title}</div>
                 </Link>
@@ -171,7 +171,7 @@ function ProjectDetailsView({ activeType, projectSlug, initialProject = null }) 
             : undefined
         }
       />
-      <section className="relative min-h-[720px] bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url(${hero})` }}>
+      <section className="relative min-h-[720px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${hero})` }}>
         <div className="absolute inset-0 bg-black/25" />
         <div className="relative z-10 flex min-h-[720px] flex-col px-6 pt-5 md:px-12">
           <div className="pt-20" />
@@ -212,7 +212,7 @@ function ProjectDetailsView({ activeType, projectSlug, initialProject = null }) 
                       <img
                         src={image}
                         alt={`${project.title} ${index + 1}`}
-                        className="h-[420px] w-full object-contain bg-zinc-950"
+                        className="h-[420px] w-full object-cover bg-zinc-950"
                       />
                     </a>
                   ))}
