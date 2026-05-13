@@ -45,6 +45,13 @@ const pages = [
   page19,
 ];
 
+function toImageSrc(image) {
+  if (!image) return "";
+  if (typeof image === "string") return image;
+  if (typeof image === "object" && typeof image.src === "string") return image.src;
+  return "";
+}
+
 function TermsPage() {
   const { getText } = useSiteContent();
 
@@ -74,7 +81,7 @@ function TermsPage() {
           {pages.map((src, index) => (
             <img
               key={index}
-              src={src}
+              src={toImageSrc(src)}
               alt={`Terms and conditions page ${index + 1}`}
               className="w-full rounded-sm shadow-lg"
               loading={index < 3 ? "eager" : "lazy"}

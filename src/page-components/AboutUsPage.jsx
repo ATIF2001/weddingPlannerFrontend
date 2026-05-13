@@ -103,7 +103,16 @@ function AboutUsPage() {
           </AnimateIn>
 
           <section id="about" className="mt-16 pb-20">
-            <AboutFounder founderImage={founderImage} />
+            <AboutFounder
+              founderImage={getImage("home.about.image", founderImage)}
+              name={getText("home.about.name", "Mohamed Kanara")}
+              role={getText("home.about.role", "Chairman & Founder")}
+              description={getText(
+                "home.about.description",
+                "Under the leadership of Mr. Mohamed Kanara, is an icon in event creation and planning in the UAE and an expert in event management field, with over 14 years of experience in turning events into inspiring experiences."
+              )}
+              phone={getText("home.about.phone", "+971 555 49 2125")}
+            />
           </section>
 
         </div>
