@@ -82,7 +82,10 @@ function HomePage() {
   const contactPhone = getText("home.contact.phone", "+971 555 44 2125");
   const contactEmail = getText("home.contact.email", "Mk4events.info@gmail.com");
   const contactAddress = getText("home.contact.address", "Wasit St - Al Shahba - Mughaider Suburb - Sharjah");
-  const heroVideo = getImage("home.hero.video", "/HeroSection.mp4");
+  const heroVideo = getText(
+    "home.hero.video",
+    "https://res.cloudinary.com/du3jsfhwt/video/upload/f_auto,q_auto/HeroSection_1_hvsbby.mp4"
+  );
 
   useEffect(() => {
     const scrollToProjectsIfNeeded = () => {
@@ -119,7 +122,15 @@ function HomePage() {
       />
 
       <section className="relative min-h-screen overflow-hidden">
-        <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline src={heroVideo} />
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          src={heroVideo}
+        />
         <div className="absolute inset-0 bg-black/35" />
         <div className="pointer-events-none absolute -left-20 top-28 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl animate-pulse" />
         <div className="pointer-events-none absolute -right-20 bottom-10 h-80 w-80 rounded-full bg-fuchsia-500/20 blur-3xl animate-pulse" />
@@ -263,6 +274,4 @@ function HomePage() {
 }
 
 export default HomePage;
-
-
 
